@@ -1,5 +1,6 @@
 <template>
     <div>
+        <b-button variant="danger" v-on:click="current=randomProperty(breedsWithSubbreeds)">Button</b-button>
         <b-card
                 no-body
                 style="max-width: 20rem;"
@@ -9,14 +10,11 @@
         >
             <h4 slot="header">Hello World</h4>
 
-            <b-card-body>
-                <b-card-title>Card Title</b-card-title>
+            <b-card-body >
+                <b-card-title >{{ current }}</b-card-title>
             </b-card-body>
-            <li>
-
-            </li>
-            <b-list-group  v-for="item in breeds" flush>
-                <b-list-group-item>{{ item }}</b-list-group-item>
+            <b-list-group v-for="breed in breedsWithSubbreeds[current]" flush>
+                <b-list-group-item >{{breed}}</b-list-group-item>
             </b-list-group>
         </b-card>
     </div>
@@ -27,22 +25,34 @@
         name: "Lab1Task4",
         data: function () {
             return {
-                breeds: this.methods.uploadBreeds(),
+                breeds: {},
+                breedsWithSubbreeds: {},
+                current: '',
             }
         },
+
+        created() {
+            let url = 'https://dog.ceo/api/breeds/list/all';
+            fetch(url).then(function(response) { return response.json(); }).then(breeds => {
+                console.log(breeds.message);
+                this.breeds = breeds.message;
+                return breeds.message;
+            }).then(breeds => {
+                for (var subbreeds in breeds) {
+                    if(breeds[subbreeds].length){
+                        this.breedsWithSubbreeds[subbreeds] = breeds[subbreeds];
+                    }
+                }
+                console.log(this.breeds);
+                console.log(this.breedsWithSubbreeds);
+            });
+        },
+        filters: {
+
+        },
         methods: {
-            uploadBreeds: function () {
-                let url = 'https://dog.ceo/api/breeds/list/all';
-                let list = []
-                fetch(url) // Call the fetch function passing the url of the API as a parameter
-                    .then(function(data) {
-                        console.log(data);
-                        list = data
-                    })
-                    .catch(function() {
-                        // This is where you run code if the server returns any errors
-                    });
-                return list
+            randomProperty: function (obj) {
+                return Object.keys(obj)[ Object.keys(obj).length * Math.random() << 0];
             }
         }
     }
