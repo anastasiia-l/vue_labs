@@ -3,22 +3,9 @@
         <b-tabs id="tab" pills card>
             <b-tab title="Task 1" active><Task1/></b-tab>
             <b-tab title="Task 2"><Task2/></b-tab>
-            <b-tab title="Task 3"></b-tab>
+            <b-tab title="Task 3"><Task3/></b-tab>
             <b-tab title="Task 4"><Task4/></b-tab>
             <b-tab title="Task 5"><Task5/></b-tab>
-            <b-tab title="Task 1" active>
-                <Task1/>
-            </b-tab>
-            <b-tab title="Task 2">
-                <Task2/>
-            </b-tab>
-            <b-tab title="Task 3">
-                <Task3/>
-            </b-tab>
-            <b-tab title="Task 4">
-                <Task4/>
-            </b-tab>
-            <b-tab title="Task 5"></b-tab>
         </b-tabs>
     </b-card>
 
