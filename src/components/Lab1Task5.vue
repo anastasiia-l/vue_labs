@@ -1,22 +1,19 @@
 <template>
     <div>
-        <b-button variant="danger" v-on:click="current.push(randomProperty(breeds))">Button</b-button>
-      <b-button variant="danger" v-on:click="current.splice(randomArrayItem(current), 1)">Button</b-button>
-        <b-button variant="danger" v-on:click="current.sort(compareRandom)">Button</b-button>
+        <b-button-group>
+        <b-button variant="success" v-on:click="current.push(randomProperty(breeds))">Add random</b-button>
+      <b-button variant="danger" v-on:click="current.splice(randomArrayItem(current), 1)">Delete random</b-button>
+        <b-button variant="warning" v-on:click="current.sort(compareRandom)">Mix</b-button>
+        </b-button-group>
         <b-card
                 no-body
-                style="max-width: 20rem;"
-                img-src="https://placekitten.com/380/200"
-                img-alt="Image"
-                img-top
+                style="max-width: 20rem;
+                       margin: 3rem auto;"
         >
-            <h4 slot="header">Hello World</h4>
+            <h4 slot="header">List of breeds</h4>
 
-            <b-card-body >
-                <b-card-title >{{ current }}</b-card-title>
-            </b-card-body>
             <b-list-group v-for="breed in current" flush>
-                <b-list-group-item >{{breed}}</b-list-group-item>
+                <b-list-group-item href="#">{{breed}}</b-list-group-item>
             </b-list-group>
         </b-card>
     </div>
