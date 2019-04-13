@@ -4,14 +4,13 @@
         <b-form-input
                 id="input-formatter"
                 v-model.lazy="textField"
-                @input="userName=textField"
                 placeholder="Enter your name"
                 aria-describedby="input-formatter-help"
         ></b-form-input>
         <b-form-text id="input-formatter-help">
             We will convert your name to lowercase instantly
         </b-form-text>
-        <div>Привет, {{ userName }}!</div>
+        <div>Привет, {{ userName(textField) }}!</div>
     </div>
 </template>
 
@@ -20,14 +19,18 @@
         name: "Lab1Task1",
         data: function () {
             return {
-                userName: "незнакомец",
-                textField: ""
+                textField: "",
             }
         },
 
         methods: {
 
         },
+        computed:{
+            userName: (app)=> (user)=> {
+                return !user ? 'незнакомец' : user
+            }
+        }
     }
 </script>
 
