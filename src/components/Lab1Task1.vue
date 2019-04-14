@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label for="input-formatter">Text input with formatter (on input)</label>
+        <label for="input-formatter">Welcome</label>
         <b-form-input
                 id="input-formatter"
                 v-model.lazy="textField"
@@ -9,9 +9,9 @@
                 aria-describedby="input-formatter-help"
         ></b-form-input>
         <b-form-text id="input-formatter-help">
-            We will convert your name to lowercase instantly
+            We will greet you instantly
         </b-form-text>
-        <div>Привет, {{ userName }}!</div>
+        <b-alert variant="success" show>Привет, {{ userName }}!</b-alert>
     </div>
 </template>
 

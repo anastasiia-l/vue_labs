@@ -1,20 +1,22 @@
 <template>
     <div>
-        <b-button variant="danger" v-on:click="current=randomProperty(breedsWithSubbreeds)">Button</b-button>
-        <b-card
+        <b-button variant="danger" v-on:click="current.name=randomProperty(breedsWithSubbreeds);
+        current.image = imageURL()">Random breed</b-button>
+        <b-card bg-variant="light"
                 no-body
-                style="max-width: 20rem;"
-                img-src="https://placekitten.com/380/200"
+                style="max-width: 20rem; margin: 1rem auto"
+                :img-src=current.image
                 img-alt="Image"
                 img-top
+
         >
-            <h4 slot="header">Hello World</h4>
+            <h4 slot="header">Breed: <b>{{ current.name }}</b></h4>
 
             <b-card-body >
-                <b-card-title >{{ current }}</b-card-title>
+                <b-card-text><b>Sub-breeds:</b></b-card-text>
             </b-card-body>
-            <b-list-group v-for="breed in breedsWithSubbreeds[current]" flush>
-                <b-list-group-item >{{breed}}</b-list-group-item>
+            <b-list-group v-for="breed in breedsWithSubbreeds[current.name]" flush>
+                <b-list-group-item>{{breed}}</b-list-group-item>
             </b-list-group>
         </b-card>
     </div>
@@ -27,19 +29,25 @@
             return {
                 breeds: {},
                 breedsWithSubbreeds: {},
-                current: '',
+                current: {
+                    name: '',
+                    image: ''
+                },
+
             }
         },
 
         created() {
             let url = 'https://dog.ceo/api/breeds/list/all';
-            fetch(url).then(function(response) { return response.json(); }).then(breeds => {
+            fetch(url).then(function (response) {
+                return response.json();
+            }).then(breeds => {
                 console.log(breeds.message);
                 this.breeds = breeds.message;
                 return breeds.message;
             }).then(breeds => {
                 for (var subbreeds in breeds) {
-                    if(breeds[subbreeds].length){
+                    if (breeds[subbreeds].length) {
                         this.breedsWithSubbreeds[subbreeds] = breeds[subbreeds];
                     }
                 }
@@ -47,15 +55,23 @@
                 console.log(this.breedsWithSubbreeds);
             });
         },
-        filters: {
-
-        },
         methods: {
             randomProperty: function (obj) {
-                return Object.keys(obj)[ Object.keys(obj).length * Math.random() << 0];
+                return Object.keys(obj)[Object.keys(obj).length * Math.random() << 0];
+            },
+            imageURL: function () {
+                let url = this.current ? 'https://dog.ceo/api/breed/' + this.current.name + '/images/random' : 'https://dog.ceo/api/breeds/image/random';
+                fetch(url).then(function (response) {
+                    return response.json();
+                }).then(breeds => {
+                    console.log(breeds.message);
+                    this.current.image = breeds.message;
+                });
             }
         }
     }
+
+
 </script>
 
 <style scoped>

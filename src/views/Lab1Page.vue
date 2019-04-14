@@ -1,6 +1,6 @@
 <template>
     <b-card no-body>
-        <b-tabs id="tab" pills card>
+        <b-tabs id="tab" pills card vertical>
             <b-tab title="Task 1" active><Task1/></b-tab>
             <b-tab title="Task 2"><Task2/></b-tab>
             <b-tab title="Task 3"><Task3/></b-tab>
@@ -25,9 +25,7 @@
 </script>
 <style scoped>
     #tab {
-        min-width: 40rem;
-        max-width: 60rem;
-        margin: auto;
+
     }
 
 </style>
