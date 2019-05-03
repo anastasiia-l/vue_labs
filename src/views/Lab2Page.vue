@@ -4,23 +4,27 @@
             <template slot="header">Lab2</template>
 
             <template slot="lead">
-                This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-                featured content or information.
+                Задание:​ Используя открытые данные, предоставляемые ресурсом opendota.com, написать приложение для работы со списком профессиональных матчей.
             </template>
 
             <hr class="my-4">
 
             <p>
-                It uses utility classes for typography and spacing to space content out within the larger
-                container.
+                1. Написать класс OpenDotaClient для доступа API (https://api.opendota.com/api)<br>
+                2. Написать Vue-компонент MatchCard, в котором отобразить информацию о матче и командах, принимавших участие.<br>
+                3. Реализовать компонент MatchList, в котором:<br>
+                ● загружать данные о матчах и командах с помощью OpenDotaClient;<br>
+                ● показывать список матчей;<br>
+                ● удалять матч при клике на кнопку “Delete”;<br>
+                ● показывать простую панель управления: refresh - обновить список матчей<br>
             </p>
 
-            <b-button variant="outline-primary" href="#">Back</b-button>
-            <b-button variant="success" href="#">Refresh</b-button>
+            <b-button variant="outline-primary" to="/">Back</b-button>
+            <b-button variant="success" href="#" v-on:click="refresh()">Refresh</b-button>
         </b-jumbotron>
         <div id="list">
         <Lab2Task2
-                v-for="current_match in this.client.format"
+                v-for="current_match in this.matches"
                 :match="current_match"
         />
         </div>
@@ -38,26 +42,19 @@
 
             return {
                 client: new OpenDotaClient(),
-                matches: {},
-                teams: {},
-                format:[],
-                perPage: 3,
-                currentPage: 1,
-
+                matches:[],
+             }
+        },
+        methods: {
+            refresh: function () {
+                this.matches = this.client.format.concat();
             }
         },
-        methods: {},
         created: async function () {
-
-            await this.client.getMatches().then(result => this.matches = result);
-            await this.client.getTeams().then( result => this.teams = result);
-            this.format = this.client.formatMatches(this.matches, this.teams);
-
-        },
-        computed: {
-            rows() {
-                return this.format.length
-            }
+            let teams, matches;
+            await this.client.getMatches().then(result => matches = result);
+            await this.client.getTeams().then( result => teams = result);
+            this.matches = this.client.formatMatches(matches, teams).concat();
         }
 
     }

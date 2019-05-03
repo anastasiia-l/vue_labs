@@ -1,5 +1,11 @@
 <template>
     <div>
+        <b-jumbotron>
+            <template slot="lead">
+                Задание: Создать поле для ввода текста и строку с текстом "Привет незнакомец"
+                Вместо слова "незнакомец" подставлять то, что будет написано в поле для ввода текста.
+            </template>
+        </b-jumbotron>
         <label for="input-formatter">Welcome</label>
         <b-form-input
                 id="input-formatter"
@@ -16,6 +22,7 @@
 </template>
 
 <script>
+
     export default {
         name: "Lab1Task1",
         data: function () {
@@ -25,9 +32,6 @@
             }
         },
 
-        methods: {
-
-        },
     }
 </script>
 

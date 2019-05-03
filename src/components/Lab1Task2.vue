@@ -1,5 +1,10 @@
 <template>
     <div>
+        <b-jumbotron>
+            <template slot="lead">
+                Задание: В предыдущем задании сделать так, чтобы после того, как был убран текст из поля для ввода строка приобрела исходный вид. Т.е. содержала текст “Привет незнакомец”
+            </template>
+        </b-jumbotron>
         <label for="input-formatter">Welcome</label>
         <b-form-input
                 id="input-formatter"

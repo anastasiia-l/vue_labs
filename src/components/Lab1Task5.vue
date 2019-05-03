@@ -1,5 +1,10 @@
 <template>
     <div>
+        <b-jumbotron>
+            <template slot="lead">
+                Задание: Сделать 3 кнопки и список. По нажатию на первую кнопку в список добавляется случайная порода собаки. По нажатию на вторую кнопку из списка удаляется случайная порода собаки. По нажатию на третью кнопку список перемешивается.
+            </template>
+        </b-jumbotron>
         <b-button-group>
         <b-button variant="success" v-on:click="current.push(randomProperty(breeds))">Add random</b-button>
       <b-button variant="danger" v-on:click="current.splice(randomArrayItem(current), 1)">Delete random</b-button>

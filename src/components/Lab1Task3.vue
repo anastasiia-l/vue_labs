@@ -1,5 +1,10 @@
 <template>
     <div>
+        <b-jumbotron>
+            <template slot="lead">
+                Задание: С помощью api, которое предоставляет данный сайт вывести список всех пород. Если порода содержит подпроды, то название этой подпороды должно быть выделено красным цветом.
+            </template>
+        </b-jumbotron>
         <h1>Breed list</h1>
         <b-list-group v-for="(value, key) in object">
             <b-list-group-item v-if="!value.length">{{ key }}</b-list-group-item>

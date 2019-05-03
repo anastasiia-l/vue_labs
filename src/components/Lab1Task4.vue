@@ -1,5 +1,10 @@
 <template>
     <div>
+        <b-jumbotron>
+            <template slot="lead">
+                Задание: Сделать кнопку, по нажатию на которую будет выводится случайная порода, содержащая подпороды и её подпороды с помощью api, которое предоставляет данный сайт
+            </template>
+        </b-jumbotron>
         <b-button variant="danger" v-on:click="current.name=randomProperty(breedsWithSubbreeds);
         current.image = imageURL()">Random breed</b-button>
         <b-card bg-variant="light"
@@ -33,7 +38,6 @@
                     name: '',
                     image: ''
                 },
-
             }
         },
 

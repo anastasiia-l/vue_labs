@@ -7,7 +7,9 @@
             <b-tab title="Task 4"><Task4/></b-tab>
             <b-tab title="Task 5"><Task5/></b-tab>
         </b-tabs>
+
     </b-card>
+
 
 </template>
 

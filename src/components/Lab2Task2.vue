@@ -51,7 +51,7 @@
                 </div>
             </b-card-body>
 
-            <b-button href="#" variant="danger">Delete</b-button>
+            <b-button href="#" variant="danger" v-on:click="remove(match.id)">Delete</b-button>
         </b-card>
     </div>
 </template>
@@ -72,6 +72,10 @@
         methods: {
             columnBackground: function(isWin) {
                 return isWin ? 'bg-success' : 'bg-danger';
+            },
+            remove: function(id) {
+                let index = this.$parent.$data.matches.findIndex(x => x.id == id );
+                this.$parent.$data.matches.splice(index,1)
             }
         }
 
